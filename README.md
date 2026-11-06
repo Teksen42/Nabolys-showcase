@@ -12,36 +12,38 @@
 
 ## What it is
 
-Nabolys ("the neighbours' light") is a Danish app for **Android and iPhone** that helps a household get ready for a crisis and keep in touch when the mobile network or the power is gone.
+Nabolys ("the neighbours' light") is a Danish app for **Android and iPhone** that helps a family and their neighbours get ready for a crisis and keep in touch when the mobile network or the power is gone.
 
 - **Stock** with best-before dates, and a warning before things expire.
 - **A three-day list** worked out for the people who live there (adults, children, small children and pets), based on the Danish authorities' advice.
 - **A family plan**: where to meet, who to call and who does what.
 - **"I'm ok" check-in** and family messages.
 - **Emergency screen**: a dark screen with big buttons, the plan and the latest check-ins.
+- **Walkie-talkie**: hold the button and talk to the family near you, phone to phone.
+- **Neighbourhoods** (on its way): a closed group for your building or street, where neighbours write to each other.
 
 Nabolys is a private project, not an official app, and it does not replace 112 or official warnings.
 
 ## Works without the network
 
-When the network is down, two phones close to each other can send check-ins and messages over **Bluetooth Low Energy**, also between iPhone and Android, and they are passed on to the server when there is a network again. Everything a family shares is **end-to-end encrypted**, so the server cannot read it. Data on the phone is stored in an encrypted database.
+When the network is down, phones near each other can send check-ins, messages and voice over **Bluetooth Low Energy**, also between iPhone and Android, and they are passed on to the server when there is a network again. Everything a family shares is **end-to-end encrypted**, so the server cannot read it. Data on the phone is stored in an encrypted database.
 
 ## Status
 
-The MVP is built, and it is not released yet. Every security-related part goes through a written internal security review (six so far), and the code has over 2,300 automated tests and CI. The server and the website run on Azure, and Bluetooth messages between two phones are tested on real phones, also between iPhone and Android.
+The MVP is built, and the app is on its way to the App Store and Google Play. Security-related parts get a written internal security review, and every change runs through automated tests and CI. The server and the website run on Azure.
 
 ## Screenshots
 
 <p align="center">
-  <img src="images/nabolys.webp" alt="Nabolys on Android: the home screen, the stock list and the three-day list" width="100%" />
+  <img src="images/nabolys.webp" alt="Nabolys: the home screen, the stock list and the three-day list" width="100%" />
   <br />
-  <em>Home, stock and the three-day list for a household of four (Android)</em>
+  <em>Home, stock and the three-day list</em>
 </p>
 
 <p align="center">
-  <img src="images/nabolys-krise.webp" alt="Nabolys on Android: the family check-in and the dark crisis mode" width="100%" />
+  <img src="images/nabolys-krise.webp" alt="Nabolys: the family check-in, the dark emergency screen and the walkie-talkie" width="100%" />
   <br />
-  <em>Family check-in and the dark emergency screen</em>
+  <em>Family check-in, the dark emergency screen and the walkie-talkie</em>
 </p>
 
 ## Stack
@@ -72,8 +74,6 @@ The MVP is built, and it is not released yet. Every security-related part goes t
 | **Bluetooth without the network** | Kotlin on Android, as an Expo module using Bluetooth Low Energy. Swift on iPhone, built and tested in CI. |
 | **Server** | C# with ASP.NET Core 10 and Entity Framework Core 10. SQL Server (LocalDB in development, Azure SQL in production). SignalR for real-time messages and online status. Azure Communication Services sends login codes by e-mail. |
 | **Operations and tests** | Azure (App Service, Azure SQL, Key Vault and Application Insights), set up with Bicep, and deploys that sign in through Entra ID. GitHub Actions for CI: tests, a scan for leaked secrets (gitleaks) and deploy. EAS Build builds the phone apps in the cloud. |
-
-Over **2,300 automated tests**: about 930 for the server, 730 for the app, 310 for the encryption and 350 for the Bluetooth code.
 
 ---
 
